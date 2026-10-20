@@ -1,0 +1,8 @@
+class,precision,recall,f1_score,support,false_positive_rate
+normal,0.746,0.8501,0.7947,874,0.1792
+leak,0.7803,0.7926,0.7864,699,0.0983
+partial_bypass,0.8914,0.7251,0.7997,713,0.0401
+macro_avg,0.8059,0.7893,0.7936,2286,
+weighted_avg,0.8018,0.7935,0.7937,2286,
+overall_accuracy,0.7935,0.7935,0.7935,2286,
+normal_operations_fpr,,,,874,0.1499

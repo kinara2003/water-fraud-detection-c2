@@ -1,0 +1,11 @@
+inspection_id,alert_id,node_id,dma_id,ground_truth_finding,label,actual_pressure,expected_pressure,hydraulic_residual,pressure_change_rate,residual_rolling_mean,residual_rolling_std,spatial_deviation,assigned_officer,inspection_time,action_taken,notes
+INSP-TRIG-0,ALT-TRIG-0,J_100,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.5,34.7,6.2,0.0,6.2,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 0,Trigger test
+INSP-TRIG-1,ALT-TRIG-1,J_500,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.2,34.8,6.6,0.0,6.6,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 1,Trigger test
+INSP-TRIG-2,ALT-TRIG-2,J_100,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.5,34.7,6.2,0.0,6.2,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 2,Trigger test
+INSP-TRIG-3,ALT-TRIG-3,J_500,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.2,34.8,6.6,0.0,6.6,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 3,Trigger test
+INSP-TRIG-4,ALT-TRIG-4,J_100,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.5,34.7,6.2,0.0,6.2,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 4,Trigger test
+INSP-TRIG-5,ALT-TRIG-5,J_500,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.2,34.8,6.6,0.0,6.6,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 5,Trigger test
+INSP-TRIG-6,ALT-TRIG-6,J_100,DMA 01,CONFIRMED_BYPASS,partial_bypass,28.5,34.7,6.2,0.0,6.2,0.12,5.8,Eng. Test,2026-10-19T09:30:00Z,Action 6,Trigger test
+INSP-TRIG-7,ALT-TRIG-7,J_500,DMA 01,CONFIRMED_LEAK,leak,31.8,34.8,3.0,-0.04,3.0,0.45,1.2,Eng. Test,2026-10-19T09:30:00Z,Action 7,Trigger test
+INSP-TRIG-8,ALT-TRIG-8,J_100,DMA 01,CONFIRMED_LEAK,leak,31.8,34.8,3.0,-0.04,3.0,0.45,1.2,Eng. Test,2026-10-19T09:30:00Z,Action 8,Trigger test
+INSP-TRIG-9,ALT-TRIG-9,J_500,DMA 01,CONFIRMED_LEAK,leak,31.8,34.8,3.0,-0.04,3.0,0.45,1.2,Eng. Test,2026-10-19T09:30:00Z,Action 9,Trigger test

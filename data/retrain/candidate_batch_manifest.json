@@ -1,0 +1,13 @@
+{
+  "candidate_batch_file": "candidate_batch.csv",
+  "generated_at": "2026-10-20T17:21:47.962334+00:00",
+  "batch_size": 10,
+  "status": "AWAITING_HUMAN_IN_THE_LOOP_VALIDATION",
+  "class_breakdown": {
+    "partial_bypass": 7,
+    "leak": 3,
+    "normal": 0
+  },
+  "target_model": "Stage 2 RandomForestClassifier (models/random_forest.joblib)",
+  "human_validator_instructions": "Review candidate_batch.csv rows. Verify ground-truth labels against physical maintenance logs. To apply retraining, post to /api/v1/models/retrain with force=True."
+}

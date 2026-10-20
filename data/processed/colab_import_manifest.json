@@ -1,0 +1,53 @@
+{
+  "last_updated": "2026-10-19T07:11:33.572096+00:00",
+  "import_history": [
+    {
+      "session_time": "2026-10-19T07:11:33.572096+00:00",
+      "count": 2,
+      "files": [
+        "bypass_J100.csv",
+        "isolation_forest.joblib"
+      ]
+    }
+  ],
+  "current_artifacts": {
+    "bypass_J100.csv": {
+      "relative_path": "data\\raw_simulations\\bypass_J100.csv",
+      "size_bytes": 28,
+      "sha256": "d754425bbe80350a5fc5c86c73f60819d9e9d26b91ac21b3778d2893cf7abbd4",
+      "status": "success",
+      "validation": {
+        "is_valid": true,
+        "message": "Valid non-empty CSV dataset",
+        "metadata": {
+          "columns": [
+            "time",
+            "J_100"
+          ],
+          "col_count": 2,
+          "preview_rows": 2
+        }
+      }
+    },
+    "isolation_forest.joblib": {
+      "relative_path": "models\\isolation_forest.joblib",
+      "size_bytes": 2521,
+      "sha256": "b93f60dac1b49608a43c8c019cc84e6944d2f85819301be27df42933863e0b67",
+      "status": "success",
+      "validation": {
+        "is_valid": true,
+        "message": "Valid scikit-learn model object",
+        "metadata": {
+          "type": "RandomForestClassifier",
+          "module": "sklearn.ensemble._forest",
+          "n_estimators": 2,
+          "classes": [
+            "0",
+            "1"
+          ],
+          "n_features_in": 1
+        }
+      }
+    }
+  }
+}

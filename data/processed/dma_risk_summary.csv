@@ -1,0 +1,7 @@
+DMA_ID,Node_ID,Peak_Risk_Score,Risk_Level,Primary_Suspected_Cause,Evidence_Summary,Inspection_Priority
+DMA 01,J_100,88.6,Critical,partial_bypass,Sustained pressure drop (peak residual: 6.34m head loss) across 3.00 hrs. Localized spatial deviation: 6.18m. Stage 2 RF bypass probability peaked at 91.0%.,P1 - Immediate Field Investigation
+DMA 01,J_10,1.13,Normal,normal,Pressure profile tightly aligned with digital twin baseline (max residual: 0.45m). Zero statistical anomalies detected.,P4 - Routine Monitoring
+DMA 01,J_500,0.88,Normal,normal,Pressure profile tightly aligned with digital twin baseline (max residual: 0.35m). Zero statistical anomalies detected.,P4 - Routine Monitoring
+DMA 02,J_2200,0.11,Normal,normal,Pressure profile tightly aligned with digital twin baseline (max residual: 0.04m). Zero statistical anomalies detected.,P4 - Routine Monitoring
+DMA 02,J_1200,0.08,Normal,normal,Pressure profile tightly aligned with digital twin baseline (max residual: 0.03m). Zero statistical anomalies detected.,P4 - Routine Monitoring
+DMA 02,J_3000,0.07,Normal,normal,Pressure profile tightly aligned with digital twin baseline (max residual: 0.03m). Zero statistical anomalies detected.,P4 - Routine Monitoring

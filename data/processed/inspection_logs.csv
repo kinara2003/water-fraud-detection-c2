@@ -1,0 +1,152 @@
+log_id,node_id,actual_finding,timestamp,notes,processed
+INSP-001,J_100,partial_bypass,2026-10-06 14:15:00,Unmetered 50mm branch discovered bypassing revenue meter behind commercial car wash,True
+INSP-002,J_10,normal,2026-10-06 15:30:00,Acoustic logger inspection confirmed normal baseline hydraulics,True
+INSP-003,J_500,leak,2026-10-06 16:45:00,Corroded joint pinhole leak verified near culvert bridge,True
+INSP-004,J_1200,normal,2026-10-07 09:10:00,Routine visual chamber inspection - no unauthorized connection,True
+INSP-005,J_2200,partial_bypass,2026-10-07 10:20:00,Illegal booster pump direct tap removed by enforcement squad,True
+INSP-006,J_3000,leak,2026-10-07 11:05:00,Flange gasket weepage verified under 3.2m residual drop,True
+INSP-007,J_100,partial_bypass,2026-10-07 11:20:00,Unauthorized underground bypass valve located and sealed,True
+INSP-008,J_500,leak,2026-10-07 11:45:00,Service main joint weld failure confirmed under excavation,True
+INSP-009,J_2200,partial_bypass,2026-10-07 12:00:00,Unmetered high-volume garden nursery connection disconnected,True
+INSP-010,J_10,normal,2026-10-07 12:15:00,Acoustic sounding survey confirmed sound pipe wall,True
+INSP-011,J_3000,leak,2026-10-07 12:30:00,Air-valve seating washer leak verified and overhauled,True
+INSP-012,J_100,partial_bypass,2026-10-07 12:45:00,Secondary clandestine 25mm PE pipe discovered at premise boundary,True
+INSP-1791356903,J_100,partial_bypass,2026-10-07 12:38:23,Automated verification test - unauthorized bypass valve plugged,True
+INSP-101,J_100,partial_bypass,2026-10-07 13:00:00,Field investigation squad removed secondary clandestine 50mm bypass tap,True
+INSP-102,J_500,leak,2026-10-07 13:15:00,Acoustic correlating logger identified joint fracture under road crossing,True
+INSP-103,J_2200,partial_bypass,2026-10-07 13:30:00,Direct motor suction booster connection dismantled and penalized,True
+INSP-104,J_10,normal,2026-10-07 13:45:00,Visual meter pit audit verified legitimate residential demand curve,True
+INSP-105,J_3000,leak,2026-10-07 14:00:00,Distribution gate valve gland packing leak confirmed and repacked,True
+INSP-106,J_100,partial_bypass,2026-10-07 14:15:00,Commercial car wash unauthorized bypass branch sealed with tamper tags,True
+INSP-1791357005,J_100,partial_bypass,2026-10-07 12:40:05,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1791357840,J_100,partial_bypass,2026-10-07 12:54:00,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1791358143,J_100,partial_bypass,2026-10-07 12:59:03,Field audit confirmed unmetered commercial bypass pipe tapped into main.,True
+INSP-1791358712,J_100,partial_bypass,2026-10-07 13:08:32,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791358724,J_100,partial_bypass,2026-10-07 13:08:44,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791358742,J_100,partial_bypass,2026-10-07 13:09:02,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1791359186,J_100,partial_bypass,2026-10-07 13:16:26,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791359204,J_100,partial_bypass,2026-10-07 13:16:44,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1791359719,J_100,partial_bypass,2026-10-07 13:25:19,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791360064,J_100,partial_bypass,2026-10-07 13:31:04,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791360630,J_100,partial_bypass,2026-10-07 13:40:30,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791360664,J_100,partial_bypass,2026-10-07 13:41:04,Field investigation team dispatched. Located unauthorized 50mm PVC bypass branch tapped directly before bulk customer meter.,True
+INSP-1791360756,J_100,partial_bypass,2026-10-07 13:42:36,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792391573,J_100,partial_bypass,2026-10-19 12:02:53,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792391625,J_100,partial_bypass,2026-10-19 12:03:45,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792391683,J_100,partial_bypass,2026-10-19 12:04:43,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792392765,J_100,partial_bypass,2026-10-19 12:22:45,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792392863,J_100,partial_bypass,2026-10-19 12:24:23,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792395380,J_100,partial_bypass,2026-10-19 13:06:20,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792395581,J_100,partial_bypass,2026-10-19 13:09:41,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792395611,J_100,partial_bypass,2026-10-19 13:10:11,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792395629,J_100,partial_bypass,2026-10-19 13:10:29,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792396005,J_100,partial_bypass,2026-10-19 13:16:45,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792400323,J_100,partial_bypass,2026-10-19 14:28:43,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792400616,J_100,partial_bypass,2026-10-19 14:33:36,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792401422,J_100,partial_bypass,2026-10-19 14:47:02,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792401872,J_100,partial_bypass,2026-10-19 14:54:32,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792406316,J_100,partial_bypass,2026-10-19 16:08:36,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792406620,J_100,partial_bypass,2026-10-19 16:13:40,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-7006,J_100,partial_bypass,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Direct bypass valve removed. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_100,partial_bypass,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Illegal sub-line capped. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_500,leak,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Pinhole joint clamp installed. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_2200,partial_bypass,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Booster pump confiscated. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_10,normal,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Refill surge transient. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_100,partial_bypass,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Commercial car wash splice removed. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_500,leak,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] Pipe burst sleeve fitted. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_2200,partial_bypass,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] High-pressure tap disconnected. Automated trigger verification demonstration.,True
+INSP-20261019-7006,J_1200,normal,2026-10-19 10:50:06,"[Eng. K. Perera (Team 3)] Demand spike, no theft found. Automated trigger verification demonstration.",True
+INSP-20261019-7006,J_100,partial_bypass,2026-10-19 10:50:06,[Eng. K. Perera (Team 3)] 10th inspection - triggering candidate batch!. Automated trigger verification demonstration.,True
+INSP-1792407149,J_100,partial_bypass,2026-10-19 16:22:29,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-7936,J_100,partial_bypass,2026-10-19 11:05:36,[Eng. K. Perera (Team 3)] Illegal bypass confiscated; NWSDB penalty notice served.. Unmetered 40mm bypass valve found concealed behind concrete retaining wall.,True
+INSP-1792408038,J_100,partial_bypass,2026-10-19 11:07:18,Automated verification test - unauthorized bypass valve plugged,True
+INSP-1792408068,J_100,partial_bypass,2026-10-19 11:07:48,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-8108,J_100,partial_bypass,2026-10-19 11:08:28,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-8108,J_100,partial_bypass,2026-10-19 11:08:28,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-20261019-8394,J_100,partial_bypass,2026-10-19 11:13:14,[Eng. K. Perera (Team 3)] Direct commercial tap confiscated; NWSDB penalty notice issued.. Unmetered 50mm branch confirmed during Viva Rehearsal demonstration.,True
+INSP-20261019-8557,J_100,partial_bypass,2026-10-19 11:15:57,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-8586,J_100,partial_bypass,2026-10-19 11:16:26,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-8611,J_100,partial_bypass,2026-10-19 11:16:51,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-1654,J_100,partial_bypass,2026-10-19 12:07:34,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-1654,J_100,partial_bypass,2026-10-19 12:07:34,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792411661,J_100,partial_bypass,2026-10-19 12:07:41,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-1668,J_100,partial_bypass,2026-10-19 12:07:48,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-2443,J_100,partial_bypass,2026-10-19 12:20:43,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-2443,J_100,partial_bypass,2026-10-19 12:20:43,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792412448,J_100,partial_bypass,2026-10-19 17:50:48,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-2455,J_100,partial_bypass,2026-10-19 12:20:55,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-2470,J_100,partial_bypass,2026-10-19 12:21:10,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-2470,J_100,partial_bypass,2026-10-19 12:21:10,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792412473,J_100,partial_bypass,2026-10-19 17:51:13,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-3161,J_100,partial_bypass,2026-10-19 12:32:41,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-3161,J_100,partial_bypass,2026-10-19 12:32:41,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792413163,J_100,partial_bypass,2026-10-19 18:02:43,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-3176,J_100,partial_bypass,2026-10-19 12:32:56,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-3176,J_100,partial_bypass,2026-10-19 12:32:56,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792413180,J_100,partial_bypass,2026-10-19 18:03:00,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-3187,J_100,partial_bypass,2026-10-19 12:33:07,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-3303,J_100,partial_bypass,2026-10-19 12:35:03,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-3303,J_100,partial_bypass,2026-10-19 12:35:03,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792413307,J_100,partial_bypass,2026-10-19 18:05:07,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-3314,J_100,partial_bypass,2026-10-19 12:35:14,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-4409,J_100,partial_bypass,2026-10-19 12:53:29,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-4410,J_100,partial_bypass,2026-10-19 12:53:30,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792414428,J_100,partial_bypass,2026-10-19 18:23:48,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-4435,J_100,partial_bypass,2026-10-19 12:53:55,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-4552,J_100,partial_bypass,2026-10-19 12:55:52,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-4552,J_100,partial_bypass,2026-10-19 12:55:52,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792414566,J_100,partial_bypass,2026-10-19 18:26:06,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-4574,J_100,partial_bypass,2026-10-19 12:56:14,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-5393,J_100,partial_bypass,2026-10-19 13:09:53,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-5393,J_100,partial_bypass,2026-10-19 13:09:53,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792415406,J_100,partial_bypass,2026-10-19 18:40:06,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-5414,J_100,partial_bypass,2026-10-19 13:10:14,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-6066,J_100,partial_bypass,2026-10-19 13:21:06,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-6066,J_100,partial_bypass,2026-10-19 13:21:06,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792416086,J_100,partial_bypass,2026-10-19 18:51:26,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-6094,J_100,partial_bypass,2026-10-19 13:21:34,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-6427,J_100,partial_bypass,2026-10-19 13:27:07,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-6427,J_100,partial_bypass,2026-10-19 13:27:07,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792416446,J_100,partial_bypass,2026-10-19 18:57:26,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-6454,J_100,partial_bypass,2026-10-19 13:27:34,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-8349,J_100,partial_bypass,2026-10-19 16:45:49,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-8349,J_100,partial_bypass,2026-10-19 16:45:49,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792428373,J_100,partial_bypass,2026-10-19 22:16:13,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-8381,J_100,partial_bypass,2026-10-19 16:46:21,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-0688,J_100,partial_bypass,2026-10-19 17:24:48,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-0688,J_100,partial_bypass,2026-10-19 17:24:48,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792430728,J_100,partial_bypass,2026-10-19 22:55:28,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-0737,J_100,partial_bypass,2026-10-19 17:25:37,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-0774,J_100,partial_bypass,2026-10-19 17:26:14,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-0774,J_100,partial_bypass,2026-10-19 17:26:14,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792430807,J_100,partial_bypass,2026-10-19 22:56:47,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-0815,J_100,partial_bypass,2026-10-19 17:26:55,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-1255,J_100,partial_bypass,2026-10-19 17:34:15,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-1255,J_100,partial_bypass,2026-10-19 17:34:15,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792431289,J_100,partial_bypass,2026-10-19 23:04:49,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-1299,J_100,partial_bypass,2026-10-19 17:34:59,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-1581,J_100,partial_bypass,2026-10-19 17:39:41,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-1581,J_100,partial_bypass,2026-10-19 17:39:41,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792431611,J_100,partial_bypass,2026-10-19 23:10:11,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-1620,J_100,partial_bypass,2026-10-19 17:40:20,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-1907,J_100,partial_bypass,2026-10-19 17:45:07,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-1920,J_100,partial_bypass,2026-10-19 17:45:20,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792431957,J_100,partial_bypass,2026-10-19 23:15:57,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-1966,J_100,partial_bypass,2026-10-19 17:46:06,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-2147,J_100,partial_bypass,2026-10-19 17:49:07,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261019-2147,J_100,partial_bypass,2026-10-19 17:49:07,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792432187,J_100,partial_bypass,2026-10-19 23:19:47,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261019-2196,J_100,partial_bypass,2026-10-19 17:49:56,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261019-2368,J_100,partial_bypass,2026-10-19 17:52:48,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261020-0796,J_100,partial_bypass,2026-10-20 07:19:56,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261020-0796,J_100,partial_bypass,2026-10-20 07:19:56,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792480826,J_100,partial_bypass,2026-10-20 12:50:26,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261020-0837,J_100,partial_bypass,2026-10-20 07:20:37,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261020-8621,J_100,partial_bypass,2026-10-20 12:17:01,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261020-8621,J_100,partial_bypass,2026-10-20 12:17:01,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792498667,J_100,partial_bypass,2026-10-20 17:47:47,Automated verification test - unauthorized bypass valve plugged,True
+INSP-20261020-8683,J_100,partial_bypass,2026-10-20 12:18:03,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,True
+INSP-20261020-6907,J_100,partial_bypass,2026-10-20 17:21:47,[Eng. K. Perera (Team 3)] Illegal tap disconnected; fine served.. Concealed polyethylene pipe uncovered.,True
+INSP-20261020-6908,J_100,partial_bypass,2026-10-20 17:21:48,[Eng. K. Perera (Team 3)] Unauthorized tap confiscated; legal penalty filed.. Verified secondary branch tap via acoustic stethoscope.,True
+INSP-1792516934,J_100,partial_bypass,2026-10-20 22:52:14,Automated verification test - unauthorized bypass valve plugged,False
+INSP-20261020-6943,J_100,partial_bypass,2026-10-20 17:22:23,[Eng. K. Perera (Team 3)] Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.. Verified unauthorized industrial tap during viva defense rehearsal demonstration.,False
