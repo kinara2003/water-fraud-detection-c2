@@ -1,0 +1,5 @@
+Model ID,Architecture,Paradigm,Precision,Recall,F1-Score,Accuracy,Refill Transient FPR (%),Avg Latency (ms)
+Model A,Static Threshold Baseline,Rule-Based (ΔP > 3.0m),0.95,0.0266,0.0518,0.3906,51.37,0.0002
+Model B,Single-Stage SVM,Multi-Class SVM (RBF Kernel),1.0,0.0266,0.0519,0.3298,87.67,0.2718
+Model C,3-Layer MLP (Deep Learning),Feedforward Neural Network (64-32-16),1.0,0.0266,0.0519,0.3911,68.49,0.0012
+Model D,Proposed Two-Stage Architecture,Isolation Forest + Random Forest + IWS Dampening,0.8944,0.6886,0.7781,0.7743,0.0,0.0088
