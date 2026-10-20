@@ -1,0 +1,15 @@
+wntr
+pandas
+numpy
+scikit-learn
+fastapi
+uvicorn[standard]
+websockets
+joblib
+pydantic
+pytest
+httpx
+seaborn
+pyproj
+requests
+python-pptx

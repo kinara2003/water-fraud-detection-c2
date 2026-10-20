@@ -1,0 +1,44 @@
+# ==============================================================================
+# Dockerfile.backend
+# Container image for Kaduwela Water Fraud Detection & Surveillance API (Component 2)
+# ==============================================================================
+
+FROM python:3.11-slim
+
+# Set environment variables for clean container execution
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app
+
+WORKDIR /app
+
+# Install essential system build dependencies, libproj for geodetics, and curl for healthcheck
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    curl \
+    libproj-dev \
+    proj-data \
+    proj-bin \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy backend application packages, data, and trained model joblib files
+COPY app/ /app/app/
+COPY src/ /app/src/
+COPY data/ /app/data/
+COPY models/ /app/models/
+
+# Expose port for FastAPI backend service
+EXPOSE 8000
+
+# Health check endpoint probe
+HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Default command to run FastAPI backend with Uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
