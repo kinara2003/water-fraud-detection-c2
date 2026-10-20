@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NWSDB Water Fraud & NRW Monitoring — Kaduwela DMAs 01 & 02</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg-base: #080c14;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --bg-surface-hover: rgba(30, 41, 59, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(56, 189, 248, 0.25);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --cyan-400: #22d3ee;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      
+      --risk-normal: #10b981;
+      --risk-normal-glow: rgba(16, 185, 129, 0.25);
+      --risk-medium: #f59e0b;
+      --risk-medium-glow: rgba(245, 158, 11, 0.25);
+      --risk-high: #f97316;
+      --risk-high-glow: rgba(249, 115, 22, 0.25);
+      --risk-critical: #ef4444;
+      --risk-critical-glow: rgba(239, 68, 68, 0.35);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.6) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 28px 48px;
+    }
+
+    /* ---------------- HEADER ---------------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nwsdb-emblem {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+      letter-spacing: -0.5px;
+    }
+
+    .header-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--cyan-400);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--risk-normal);
+      box-shadow: 0 0 8px var(--risk-normal);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* ---------------- OVERVIEW CARDS ---------------- */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .card-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-critical {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--risk-critical);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      box-shadow: 0 0 10px var(--risk-critical-glow);
+    }
+
+    .badge-normal {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--risk-normal);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .card-metric {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ---------------- MAIN SPLIT SECTION ---------------- */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 440px 1fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    /* ---------------- ALERT CARD (LEFT) ---------------- */
+    .alert-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .node-selector {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .node-selector option {
+      background: #0f172a;
+      color: #fff;
+    }
+
+    /* GAUGE WRAPPER */
+    .gauge-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 10px 0;
+    }
+
+    .gauge-svg {
+      width: 240px;
+      height: 130px;
+      overflow: visible;
+    }
+
+    .gauge-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 16;
+      stroke-linecap: round;
+    }
+
+    .gauge-fill {
+      fill: none;
+      stroke-width: 16;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.4s ease;
+    }
+
+    .gauge-center-text {
+      position: absolute;
+      top: 65px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gauge-score {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .gauge-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* CLASSIFICATION & ACTION BANNERS */
+    .classification-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .class-meta .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .class-meta .val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .action-box {
+      background: rgba(239, 68, 68, 0.08);
+      border-left: 4px solid var(--risk-critical);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+    }
+
+    .action-box.normal {
+      background: rgba(16, 185, 129, 0.08);
+      border-left-color: var(--risk-normal);
+    }
+
+    .action-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .action-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* EVIDENCE CHECKLIST */
+    .checklist-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checklist-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      transition: background 0.2s ease;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .check-icon.true {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--risk-normal);
+      border: 1px solid var(--risk-normal);
+    }
+
+    .check-icon.false {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--risk-critical);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .check-text {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    /* QUICK ACTIONS */
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+      padding-top: 6px;
+    }
+
+    .quick-btn {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s;
+    }
+
+    .quick-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ---------------- CHART PANEL (RIGHT) ---------------- */
+    .chart-panel {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .chart-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chart-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .chart-tab {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .chart-tab.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .chart-box {
+      position: relative;
+      width: 100%;
+      height: 380px;
+    }
+
+    .chart-legend-custom {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    /* ---------------- MONITORING TABLE ---------------- */
+    .table-panel {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    td {
+      font-size: 13px;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .node-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--cyan-400);
+      background: rgba(34, 211, 238, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .json-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: #080c14;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
+      overflow-x: auto;
+      max-height: 220px;
+    }
+
+    @media (max-width: 1080px) {
+      .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ---------------- HEADER ---------------- -->
+    <header>
+      <div class="brand-wrap">
+        <div class="nwsdb-emblem">NWS</div>
+        <div class="header-text">
+          <h1>
+            NWSDB Network-Level Water Fraud &amp; NRW Monitoring
+            <span class="badge-pill"><span class="pulse-dot"></span> Live Telemetry</span>
+          </h1>
+          <p>Kaduwela DMAs 01 &amp; 02 — Pressure-Dependent Digital Twin Surveillance</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="/inspections" class="btn btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 7px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Page 4: Dispatched Alerts &rarr;
+        </a>
+        <button id="refreshBtn" class="btn btn-secondary" onclick="fetchLiveStatus()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          Refresh Now
+        </button>
+        <button id="autoToggleBtn" class="btn btn-primary" onclick="toggleAutoRefresh()">
+          Auto-Refresh: ON (5s)
+        </button>
+      </div>
+    </header>
+
+    <!-- ---------------- 4 STATUS OVERVIEW CARDS ---------------- -->
+    <section class="overview-grid">
+      <!-- 1. Current Supply Window State -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">Supply Window State</span>
+          <span id="supplyBadge" class="card-badge badge-normal">Active Cycle</span>
+        </div>
+        <div id="supplyHoursVal" class="card-metric">06:00 – 18:00</div>
+        <div id="supplyDesc" class="card-desc">Active Supply Window (Refill Transients Stabilized)</div>
+      </div>
+
+      <!-- 2. DMA 01 Status -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">DMA 01 Status</span>
+          <span id="dma1Badge" class="card-badge badge-critical">Critical Alert</span>
+        </div>
+        <div id="dma1LossVal" class="card-metric">0.05 LPS Loss</div>
+        <div id="dma1Desc" class="card-desc">Node J_100 (Unmetered Bypass Detected)</div>
+      </div>
+
+      <!-- 3. DMA 02 Status -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">DMA 02 Status</span>
+          <span id="dma2Badge" class="card-badge badge-normal">Normal Ops</span>
+        </div>
+        <div id="dma2LossVal" class="card-metric">0.00 LPS Loss</div>
+        <div id="dma2Desc" class="card-desc">All 3 monitoring nodes conforming to twin bounds</div>
+      </div>
+
+      <!-- 4. Highest Risk Sector -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">Highest Risk Sector</span>
+          <span id="highestRiskBadge" class="card-badge badge-critical">Score: 88.6</span>
+        </div>
+        <div id="highestSectorVal" class="card-metric">DMA 01: J_100</div>
+        <div id="highestSectorDesc" class="card-desc">Priority P1: Immediate Field Inspection</div>
+      </div>
+    </section>
+
+    <!-- ---------------- MAIN INTERACTIVE GRID ---------------- -->
+    <section class="main-grid">
+
+      <!-- LEFT PANEL: INTERACTIVE ALERT CARD -->
+      <div class="alert-card">
+        <div class="section-head">
+          <div class="section-title">Forensic Alert Triage</div>
+          <select id="nodeSelect" class="node-selector" onchange="onNodeChange()">
+            <option value="J_100">Node J_100 (DMA 01) — Critical</option>
+            <option value="J_10">Node J_10 (DMA 01) — Normal</option>
+            <option value="J_500">Node J_500 (DMA 01) — Normal</option>
+            <option value="J_1200">Node J_1200 (DMA 02) — Normal</option>
+            <option value="J_2200">Node J_2200 (DMA 02) — Normal</option>
+            <option value="J_3000">Node J_3000 (DMA 02) — Normal</option>
+          </select>
+        </div>
+
+        <!-- CIRCULAR FRAUD RISK GAUGE -->
+        <div class="gauge-wrapper">
+          <svg class="gauge-svg" viewBox="0 0 200 110">
+            <!-- Background Arc (Radius 80, Circumference of half circle = 251.3) -->
+            <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100" />
+            <!-- Active Progress Arc -->
+            <path id="gaugePath" class="gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" 
+                  stroke="#ef4444" stroke-dasharray="251.32" stroke-dashoffset="30" />
+          </svg>
+          <div class="gauge-center-text">
+            <div id="gaugeScoreText" class="gauge-score" style="color: #ef4444;">88.6</div>
+            <div id="gaugeLevelBadge" class="card-badge badge-critical">CRITICAL FRAUD RISK</div>
+          </div>
+        </div>
+
+        <!-- CAUSE CLASSIFICATION -->
+        <div class="classification-box">
+          <div class="class-meta">
+            <div class="label">Primary Root Cause</div>
+            <div id="causeText" class="val">Unmetered Bypass (Commercial Theft)</div>
+          </div>
+          <div class="class-meta" style="text-align: right;">
+            <div class="label">RF Confidence</div>
+            <div id="confidenceText" class="val" style="color: var(--cyan-400);">91.0% Bypass</div>
+          </div>
+        </div>
+
+        <!-- INSPECTION RECOMMENDATION -->
+        <div id="actionBox" class="action-box">
+          <div class="action-label">Field Recommendation (Action Dispatch)</div>
+          <div id="actionText" class="action-text">
+            P1 — Immediate Field Investigation Recommended: Dispatch inspection team to junction J_100 to locate illegal branch.
+          </div>
+        </div>
+
+        <!-- EVIDENCE CHECKLIST -->
+        <div class="checklist-wrap">
+          <div class="checklist-title">Multi-Criteria Forensic Evidence</div>
+          
+          <div class="check-item">
+            <div id="chkDrop" class="check-icon true">✓</div>
+            <div class="check-text">Pressure Drop Deficit (&gt; 1.5 m Head Loss Observed)</div>
+          </div>
+
+          <div class="check-item">
+            <div id="chkSpatial" class="check-icon true">✓</div>
+            <div class="check-text">Spatial Mismatch Divergence (&gt; 0.5 m vs Adjacent DMA)</div>
+          </div>
+
+          <div class="check-item">
+            <div id="chkDigitalTwin" class="check-icon true">✓</div>
+            <div class="check-text">Digital Twin Baseline Residual Match (Outlier Flagged)</div>
+          </div>
+
+          <div class="check-item">
+            <div id="chkLeakInsufficient" class="check-icon false">✗</div>
+            <div class="check-text">Leak Rule Insufficient (Not a Physical Pressure Decay)</div>
+          </div>
+        </div>
+
+        <!-- MULTI-COMPONENT INTEGRATION ACTION BUTTONS -->
+        <div class="quick-actions">
+          <button class="quick-btn" onclick="triggerC1LeakFeedback()">Simulate C1 Feedback</button>
+          <button class="quick-btn" onclick="openC3Modal()">C3 Water Loss</button>
+          <button class="quick-btn" onclick="openC4Modal()">C4 Intrusion Events</button>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL: TIME-SERIES HYDRAULIC CHART -->
+      <div class="chart-panel">
+        <div class="chart-controls">
+          <div>
+            <div class="section-title">24-Hour Hydraulic Cycle Telemetry</div>
+            <div id="chartSubhead" style="font-size: 12px; color: var(--text-dim);">
+              Comparing Expected Digital Twin vs. Actual Telemetry Pressure
+            </div>
+          </div>
+
+          <div class="chart-tabs">
+            <button class="chart-tab active" id="tabProfiles" onclick="setChartView('profiles')">Pressure Profiles</button>
+            <button class="chart-tab" id="tabResidual" onclick="setChartView('residual')">Head Loss Residual</button>
+          </div>
+        </div>
+
+        <div class="chart-legend-custom">
+          <div class="legend-item">
+            <span class="legend-color" style="background: #3b82f6;"></span> Expected Baseline (m)
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: #ef4444;"></span> Actual Pressure (m)
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: rgba(239, 68, 68, 0.3); height: 10px; width: 14px;"></span> Injected Theft Window (06:00 – 11:00)
+          </div>
+          <div class="legend-item">
+            <span class="legend-color" style="background: rgba(245, 158, 11, 0.3); height: 10px; width: 14px;"></span> Refill Transient (45–60 min)
+          </div>
+        </div>
+
+        <div class="chart-box">
+          <canvas id="pressureChart"></canvas>
+        </div>
+
+        <!-- METRIC BADGES BELOW CHART -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding-top: 6px;">
+          <div style="background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Observed Pressure</div>
+            <div id="statActual" style="font-family: 'Outfit'; font-size: 18px; font-weight: 700; color: #fff;">28.5 m</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Expected Baseline</div>
+            <div id="statExpected" style="font-family: 'Outfit'; font-size: 18px; font-weight: 700; color: #fff;">34.7 m</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Peak Head Deficit</div>
+            <div id="statDeficit" style="font-family: 'Outfit'; font-size: 18px; font-weight: 700; color: #ef4444;">-6.34 m</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+            <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Intrusion Risk</div>
+            <div id="statIntrusion" style="font-family: 'Outfit'; font-size: 18px; font-weight: 700; color: #f97316;">Elevated (&gt;5m)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- FULL NETWORK MONITORING TABLE ---------------- -->
+    <section class="table-panel">
+      <div class="section-head">
+        <div class="section-title">Designated Sensor Nodes Surveillance Matrix</div>
+        <span style="font-size: 12px; color: var(--text-dim);">Live Multi-Node DMA Summary</span>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>DMA</th>
+              <th>Node ID</th>
+              <th>Peak Risk Score</th>
+              <th>Risk Level</th>
+              <th>Primary Suspected Cause</th>
+              <th>Inspection Priority</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="nodesTableBody">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ---------------- MODAL OVERLAYS ---------------- -->
+  <div id="infoModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-head">
+        <div id="modalTitle" class="modal-title">Integration Query Result</div>
+        <button class="btn btn-secondary" onclick="closeModalDirect()" style="padding: 4px 10px;">✕</button>
+      </div>
+      <div id="modalBodyText" class="modal-body"></div>
+      <pre id="modalJson" class="json-code"></pre>
+    </div>
+  </div>
+
+  <script>
+    // State management
+    let liveData = null;
+    let selectedNode = "J_100";
+    let chartView = "profiles"; // 'profiles' or 'residual'
+    let autoRefresh = true;
+    let refreshIntervalMs = 5000;
+    let refreshTimer = null;
+    let chartInstance = null;
+
+    // Initialize on load
+    document.addEventListener("DOMContentLoaded", () => {
+      initChart();
+      fetchLiveStatus();
+      startAutoRefresh();
+    });
+
+    function initChart() {
+      const ctx = document.getElementById("pressureChart").getContext("2d");
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: []
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              titleColor: '#f8fafc',
+              bodyColor: '#cbd5e1',
+              borderColor: 'rgba(255, 255, 255, 0.1)',
+              borderWidth: 1,
+              padding: 12,
+              boxPadding: 6,
+              usePointStyle: true,
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.04)' },
+              ticks: { color: '#64748b', maxTicksLimit: 12, font: { family: 'JetBrains Mono', size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.04)' },
+              ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 11 } }
+            }
+          }
+        }
+      });
+    }
+
+    async function fetchLiveStatus() {
+      try {
+        const res = await fetch("/api/v1/dma-status");
+        if (!res.ok) throw new Error("Failed to fetch DMA status");
+        liveData = await res.json();
+        updateUI();
+      } catch (err) {
+        console.error("Error fetching live status:", err);
+      }
+    }
+
+    function toggleAutoRefresh() {
+      autoRefresh = !autoRefresh;
+      const btn = document.getElementById("autoToggleBtn");
+      if (autoRefresh) {
+        btn.textContent = "Auto-Refresh: ON (5s)";
+        btn.classList.add("btn-primary");
+        btn.classList.remove("btn-secondary");
+        startAutoRefresh();
+      } else {
+        btn.textContent = "Auto-Refresh: OFF";
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-secondary");
+        clearInterval(refreshTimer);
+      }
+    }
+
+    function startAutoRefresh() {
+      clearInterval(refreshTimer);
+      if (autoRefresh) {
+        refreshTimer = setInterval(fetchLiveStatus, refreshIntervalMs);
+      }
+    }
+
+    function updateUI() {
+      if (!liveData) return;
+
+      // 1. Update Overview Cards
+      const sw = liveData.supply_window || {};
+      document.getElementById("supplyBadge").textContent = sw.state || "Active Supply";
+      document.getElementById("supplyHoursVal").textContent = `${sw.window_start || "06:00"} – ${sw.window_end || "18:00"}`;
+      document.getElementById("supplyDesc").textContent = `Elapsed: ${sw.hours_since_supply_start || 0} hrs | Refill Transients Dampened`;
+
+      const dma1 = (liveData.dma_summary && liveData.dma_summary.dma_01) || {};
+      document.getElementById("dma1LossVal").textContent = `${dma1.unmetered_loss_lps || 0.05} LPS Loss`;
+      document.getElementById("dma1Badge").textContent = dma1.status || "Critical Alert";
+
+      const dma2 = (liveData.dma_summary && liveData.dma_summary.dma_02) || {};
+      document.getElementById("dma2LossVal").textContent = `${dma2.unmetered_loss_lps || 0.00} LPS Loss`;
+      document.getElementById("dma2Badge").textContent = dma2.status || "Normal Operations";
+
+      const highest = (liveData.dma_summary && liveData.dma_summary.highest_risk_sector) || {};
+      document.getElementById("highestSectorVal").textContent = `${highest.node_id || "J_100"} (${highest.risk_level || "Critical"})`;
+      document.getElementById("highestRiskBadge").textContent = `Score: ${highest.peak_risk_score || 88.6}`;
+
+      // 2. Update Alert Card for Selected Node
+      renderAlertCard();
+
+      // 3. Update Chart
+      renderChart();
+
+      // 4. Update Monitoring Table
+      renderTable();
+    }
+
+    function onNodeChange() {
+      selectedNode = document.getElementById("nodeSelect").value;
+      renderAlertCard();
+      renderChart();
+    }
+
+    function renderAlertCard() {
+      if (!liveData || !liveData.nodes) return;
+      const nodeData = liveData.nodes.find(n => n.node_id === selectedNode) || liveData.nodes[0];
+      if (!nodeData) return;
+
+      const score = nodeData.peak_risk_score;
+      const scoreElem = document.getElementById("gaugeScoreText");
+      scoreElem.textContent = score.toFixed(1);
+
+      // Color coding & Gauge Arc Math
+      // Circumference = 251.32
+      let color = "#10b981";
+      let levelText = "NORMAL RISK";
+      let badgeClass = "badge-normal";
+
+      if (score >= 75) {
+        color = "#ef4444";
+        levelText = "CRITICAL FRAUD RISK";
+        badgeClass = "badge-critical";
+      } else if (score >= 50) {
+        color = "#f97316";
+        levelText = "HIGH FRAUD RISK";
+        badgeClass = "badge-critical";
+      } else if (score >= 25) {
+        color = "#f59e0b";
+        levelText = "MEDIUM FRAUD RISK";
+        badgeClass = "badge-normal";
+      }
+
+      scoreElem.style.color = color;
+      const badge = document.getElementById("gaugeLevelBadge");
+      badge.textContent = levelText;
+      badge.className = `card-badge ${badgeClass}`;
+      badge.style.borderColor = color;
+
+      // Calculate stroke-dashoffset: 0 score = 251.32 offset; 100 score = 0 offset
+      const dashoffset = 251.32 * (1 - (score / 100));
+      const gaugePath = document.getElementById("gaugePath");
+      gaugePath.style.stroke = color;
+      gaugePath.style.strokeDashoffset = dashoffset;
+
+      // Cause text
+      const causeText = document.getElementById("causeText");
+      const confText = document.getElementById("confidenceText");
+      if (nodeData.classification === "partial_bypass") {
+        causeText.textContent = "Unmetered Bypass (Commercial Theft)";
+        if (confText) confText.textContent = "91.0% Bypass";
+      } else if (nodeData.classification === "physical_leak" || nodeData.classification === "leak") {
+        causeText.textContent = "Physical Pipe Leak";
+        if (confText) confText.textContent = "88.0% Leak (C1)";
+      } else {
+        causeText.textContent = "Normal Hydraulic Operation";
+        if (confText) confText.textContent = "99.2% Normal";
+      }
+
+      // Action box
+      document.getElementById("actionText").textContent = nodeData.recommended_action || "Routine Monitoring";
+      const actionBox = document.getElementById("actionBox");
+      if (score >= 50) {
+        actionBox.className = "action-box";
+      } else {
+        actionBox.className = "action-box normal";
+      }
+
+      // Evidence checklist
+      const ev = nodeData.evidence_checklist || {};
+      updateCheckItem("chkDrop", ev.pressure_drop);
+      updateCheckItem("chkSpatial", ev.spatial_mismatch);
+      updateCheckItem("chkDigitalTwin", ev.digital_twin_residual_match);
+      updateCheckItem("chkLeakInsufficient", ev.leak_rule_insufficient);
+
+      // Stat badges
+      document.getElementById("statActual").textContent = `${(nodeData.current_actual_pressure || 28.5).toFixed(1)} m`;
+      document.getElementById("statExpected").textContent = `${(nodeData.current_expected_pressure || 34.7).toFixed(1)} m`;
+      document.getElementById("statDeficit").textContent = `-${(nodeData.current_residual || 0).toFixed(2)} m`;
+      document.getElementById("statIntrusion").textContent = (nodeData.current_residual > 5.0) ? "Critical (>5m)" : "Nominal (<1m)";
+    }
+
+    function updateCheckItem(elementId, isTrue) {
+      const el = document.getElementById(elementId);
+      if (isTrue) {
+        el.className = "check-icon true";
+        el.textContent = "✓";
+      } else {
+        el.className = "check-icon false";
+        el.textContent = "✗";
+      }
+    }
+
+    function setChartView(view) {
+      chartView = view;
+      document.getElementById("tabProfiles").className = (view === 'profiles') ? "chart-tab active" : "chart-tab";
+      document.getElementById("tabResidual").className = (view === 'residual') ? "chart-tab active" : "chart-tab";
+      renderChart();
+    }
+
+    function renderChart() {
+      if (!liveData || !liveData.timeseries || !chartInstance) return;
+      const ts = liveData.timeseries;
+      const nodeTs = ts.nodes_data && ts.nodes_data[selectedNode];
+      if (!nodeTs) return;
+
+      chartInstance.data.labels = ts.labels || [];
+
+      if (chartView === "profiles") {
+        chartInstance.data.datasets = [
+          {
+            label: "Expected Baseline (m)",
+            data: nodeTs.expected_pressure || [],
+            borderColor: "#3b82f6",
+            borderWidth: 2.2,
+            borderDash: [5, 4],
+            pointRadius: 0,
+            fill: false,
+          },
+          {
+            label: "Actual Pressure (m)",
+            data: nodeTs.actual_pressure || [],
+            borderColor: (selectedNode === "J_100") ? "#ef4444" : "#10b981",
+            borderWidth: 2.2,
+            pointRadius: 0,
+            fill: false,
+          }
+        ];
+        chartInstance.options.scales.y.title = { display: true, text: 'Pressure Head (m)', color: '#64748b' };
+      } else {
+        chartInstance.data.datasets = [
+          {
+            label: "Hydraulic Head Loss Residual (m)",
+            data: nodeTs.residual || [],
+            borderColor: "#a855f7",
+            borderWidth: 2,
+            backgroundColor: "rgba(168, 85, 247, 0.15)",
+            pointRadius: 0,
+            fill: true,
+          }
+        ];
+        chartInstance.options.scales.y.title = { display: true, text: 'Head Loss Deficit (m)', color: '#64748b' };
+      }
+
+      chartInstance.update();
+    }
+
+    function renderTable() {
+      if (!liveData || !liveData.nodes) return;
+      const tbody = document.getElementById("nodesTableBody");
+      tbody.innerHTML = "";
+
+      liveData.nodes.forEach(n => {
+        const tr = document.createElement("tr");
+        let badgeColor = "#10b981";
+        if (n.risk_level === "Critical") badgeColor = "#ef4444";
+        else if (n.risk_level === "High") badgeColor = "#f97316";
+        else if (n.risk_level === "Medium") badgeColor = "#f59e0b";
+
+        tr.innerHTML = `
+          <td><strong>${n.dma_id}</strong></td>
+          <td><span class="node-code">${n.node_id}</span></td>
+          <td style="font-family: 'Outfit'; font-weight: 700; color: ${badgeColor};">${n.peak_risk_score.toFixed(2)}</td>
+          <td><span class="card-badge" style="background: rgba(255,255,255,0.06); color: ${badgeColor}; border: 1px solid ${badgeColor};">${n.risk_level}</span></td>
+          <td>${n.classification}</td>
+          <td style="font-size: 12px; color: #94a3b8;">${n.inspection_priority}</td>
+          <td>
+            <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="selectNodeFromTable('${n.node_id}')">
+              Select
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function selectNodeFromTable(nodeId) {
+      selectedNode = nodeId;
+      document.getElementById("nodeSelect").value = nodeId;
+      renderAlertCard();
+      renderChart();
+    }
+
+    // ---------------- INTEGRATION ACTIONS ----------------
+    async function triggerC1LeakFeedback() {
+      const payload = {
+        zone_id: "DMA 01",
+        node_id: "J_100",
+        leak_probability: 0.88,
+        current_fraud_score: 88.60
+      };
+      try {
+        const res = await fetch("/api/v1/c1-leak-feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        showModal("Component 1 (C1) Leak Cross-Validation Feedback Applied", data);
+        fetchLiveStatus(); // Refresh UI to reflect -40% score drop and physical leak reclassification!
+      } catch (err) {
+        alert("Failed to submit C1 feedback: " + err);
+      }
+    }
+
+    async function openC3Modal() {
+      try {
+        const res = await fetch("/api/v1/c3-water-loss/DMA_01");
+        const data = await res.json();
+        showModal("Component 3 (C3) Storage Water Loss Forecast", data);
+      } catch (err) {
+        alert("Failed to query C3: " + err);
+      }
+    }
+
+    async function openC4Modal() {
+      try {
+        const res = await fetch("/api/v1/c4-pressure-drop-events?threshold_m=5.0");
+        const data = await res.json();
+        showModal("Component 4 (C4) Intrusion Risk Depressurization Events", data);
+      } catch (err) {
+        alert("Failed to query C4: " + err);
+      }
+    }
+
+    function showModal(title, jsonPayload) {
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalBodyText").textContent = jsonPayload.message || jsonPayload.storage_forecast_impact || jsonPayload.recommendation || "";
+      document.getElementById("modalJson").textContent = JSON.stringify(jsonPayload, null, 2);
+      document.getElementById("infoModal").classList.add("active");
+    }
+
+    function closeModalDirect() {
+      document.getElementById("infoModal").classList.remove("active");
+    }
+
+    function closeModal(e) {
+      if (e.target.id === "infoModal") {
+        closeModalDirect();
+      }
+    }
+  </script>
+</body>
+</html>

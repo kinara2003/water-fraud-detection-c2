@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NWSDB Admin Portal — Page 4: Field Inspections &amp; Dispatched Alerts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #080c14;
+      --bg-surface: rgba(15, 23, 42, 0.75);
+      --bg-surface-hover: rgba(30, 41, 59, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(56, 189, 248, 0.25);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --cyan-400: #22d3ee;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      
+      --risk-normal: #10b981;
+      --risk-medium: #f59e0b;
+      --risk-high: #f97316;
+      --risk-critical: #ef4444;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(239, 68, 68, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.7) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 28px 48px;
+    }
+
+    /* ---------------- HEADER ---------------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px;
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nwsdb-emblem {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+    }
+
+    .header-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      margin-left: 20px;
+    }
+
+    .nav-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn.inactive {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .nav-btn.inactive:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0369a1, #1d4ed8);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: linear-gradient(135deg, #991b1b, #b91c1c);
+    }
+
+    .btn-retrain {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-retrain:hover:not(:disabled) {
+      background: linear-gradient(135deg, #6d28d9, #4338ca);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
+    }
+
+    .btn-retrain:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* TOAST NOTIFICATION SYSTEM */
+    .toast-container {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 440px;
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: 5px solid #7c3aed;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+      color: var(--text-main);
+      font-size: 13px;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .toast.success {
+      border-left-color: #10b981;
+    }
+
+    .toast.warning {
+      border-left-color: #f59e0b;
+    }
+
+    .toast.error {
+      border-left-color: #ef4444;
+    }
+
+    .toast-title {
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .toast-body {
+      color: var(--text-dim);
+      font-size: 12px;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* ---------------- OVERVIEW CARDS ---------------- */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-glow);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-critical {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .badge-normal {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-sent {
+      background: rgba(14, 165, 233, 0.15);
+      color: #7dd3fc;
+      border: 1px solid rgba(14, 165, 233, 0.4);
+    }
+
+    .card-metric {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ---------------- TABLE PANEL ---------------- */
+    .table-panel {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .realtime-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+      100% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    td {
+      font-size: 13px;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .node-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--cyan-400);
+      background: rgba(34, 211, 238, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .alert-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .channel-tag {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 3px;
+      color: #94a3b8;
+    }
+
+    .status-sent {
+      color: #34d399;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-failed {
+      color: #f87171;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #0f172a;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 680px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .json-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: #080c14;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
+      overflow-x: auto;
+      max-height: 380px;
+    }
+
+    @media (max-width: 1080px) {
+      .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ---------------- HEADER ---------------- -->
+    <header>
+      <div class="brand-wrap">
+        <div class="nwsdb-emblem">NWS</div>
+        <div class="header-text">
+          <h1>
+            NWSDB Admin Portal — Page 4: Inspections &amp; Alerts
+            <span class="realtime-badge"><span class="pulse-dot"></span> Authority Dispatch System</span>
+          </h1>
+          <p>National Water Supply &amp; Drainage Board • Water Fraud Emergency Dispatch</p>
+        </div>
+
+        <nav class="nav-links">
+          <a href="/" class="nav-btn inactive">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Surveillance Dashboard
+          </a>
+          <a href="/inspections" class="nav-btn active">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Page 4: Dispatched Alerts
+          </a>
+          <a href="/docs" target="_blank" class="nav-btn inactive">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            API Docs
+          </a>
+        </nav>
+      </div>
+
+      <div class="header-actions">
+        <button id="retrainBtn" class="btn btn-retrain" onclick="triggerModelRetraining()">
+          <svg id="retrainIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          <span id="retrainBtnText">Retrain Model with Field Verifications</span>
+        </button>
+        <button id="dispatchTestBtn" class="btn btn-danger" onclick="triggerManualDispatchTest()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Test Alert Dispatch
+        </button>
+        <button id="refreshBtn" class="btn btn-secondary" onclick="fetchAlertsHistory()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          Refresh Now
+        </button>
+        <button id="autoToggleBtn" class="btn btn-primary" onclick="toggleAutoRefresh()">
+          Auto-Refresh: ON (5s)
+        </button>
+      </div>
+    </header>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ---------------- 4 OVERVIEW METRIC CARDS ---------------- -->
+    <section class="overview-grid">
+      <!-- 1. Real-time Dispatched Alerts Badge Card -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">Dispatched Alerts</span>
+          <span id="badgeDispatched" class="card-badge badge-sent">Delivery: 100% Sent</span>
+        </div>
+        <div id="metricTotalAlerts" class="card-metric">0 Alerts</div>
+        <div id="metricLastDispatch" class="card-desc">Real-Time Dispatch Cache Active</div>
+      </div>
+
+      <!-- 2. Alert Cooldown Policy -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">Deduplication Rule</span>
+          <span class="card-badge badge-normal">Active (6h)</span>
+        </div>
+        <div class="card-metric">1 / 6 Hours</div>
+        <div class="card-desc">Bypassed when Risk &gt; 85% (Critical Escalation)</div>
+      </div>
+
+      <!-- 3. Primary Recipient Email -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">Authority Email</span>
+          <span class="card-badge badge-sent">SMTP Active</span>
+        </div>
+        <div id="metricEmail" class="card-metric" style="font-size: 18px; word-break: break-all;">investigations@nwsdb.gov.lk</div>
+        <div class="card-desc">Urgent Tabular Incident Notification</div>
+      </div>
+
+      <!-- 4. Municipal Webhook Target -->
+      <div class="card">
+        <div class="card-top">
+          <span class="card-title">Municipal Webhook</span>
+          <span class="card-badge badge-sent">JSON Stream</span>
+        </div>
+        <div id="metricWebhook" class="card-metric" style="font-size: 16px; word-break: break-all;">municipal-dispatch.nwsdb.gov.lk</div>
+        <div class="card-desc">Automated Workorder Taskforce Integration</div>
+      </div>
+    </section>
+
+    <!-- ---------------- REAL-TIME ALERTS TABLE ---------------- -->
+    <section class="table-panel">
+      <div class="section-head">
+        <div class="section-title">
+          Dispatched Alerts to Authorities
+          <span id="liveCounterBadge" class="realtime-badge">
+            <span class="pulse-dot"></span> <span id="alertCountText">Loading alerts...</span>
+          </span>
+        </div>
+        <div style="font-size: 12px; color: var(--text-dim);">
+          Source: <code>data/processed/dispatched_alerts.json</code>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Alert ID &amp; Time</th>
+              <th>Location</th>
+              <th>Fraud Risk Score</th>
+              <th>Cause Classification</th>
+              <th>Delivery Status</th>
+              <th>Recipient Channel</th>
+              <th>Inspection Priority</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="alertsTableBody">
+            <tr>
+              <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 30px;">
+                Checking dispatched alerts registry...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ---------------- MODAL FOR DETAILED ALERT PAYLOAD ---------------- -->
+  <div id="alertDetailModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-head">
+        <div id="modalTitle" class="modal-title">Dispatched Alert Payload</div>
+        <button class="btn btn-secondary" onclick="closeModalDirect()" style="padding: 4px 10px;">✕</button>
+      </div>
+      <pre id="modalJson" class="json-code"></pre>
+    </div>
+  </div>
+
+  <script>
+    let alertsData = [];
+    let autoRefresh = true;
+    let refreshTimer = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchAlertsHistory();
+      startAutoRefresh();
+    });
+
+    async function fetchAlertsHistory() {
+      try {
+        const res = await fetch("/api/v1/notifications/history");
+        if (!res.ok) throw new Error("Failed to fetch notification history");
+        const json = await res.json();
+        alertsData = Array.isArray(json) ? json : (json.alerts || []);
+        updateUI();
+      } catch (err) {
+        console.error("Error fetching alert history:", err);
+      }
+    }
+
+    function toggleAutoRefresh() {
+      autoRefresh = !autoRefresh;
+      const btn = document.getElementById("autoToggleBtn");
+      if (autoRefresh) {
+        btn.textContent = "Auto-Refresh: ON (5s)";
+        btn.classList.add("btn-primary");
+        btn.classList.remove("btn-secondary");
+        startAutoRefresh();
+      } else {
+        btn.textContent = "Auto-Refresh: OFF";
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-secondary");
+        clearInterval(refreshTimer);
+      }
+    }
+
+    function startAutoRefresh() {
+      clearInterval(refreshTimer);
+      if (autoRefresh) {
+        refreshTimer = setInterval(fetchAlertsHistory, 5000);
+      }
+    }
+
+    function updateUI() {
+      const totalCount = alertsData.length;
+      document.getElementById("metricTotalAlerts").textContent = `${totalCount} Alert${totalCount === 1 ? '' : 's'}`;
+      document.getElementById("alertCountText").textContent = `${totalCount} Dispatched Alert${totalCount === 1 ? '' : 's'}`;
+
+      if (totalCount > 0) {
+        const first = alertsData[0];
+        document.getElementById("metricLastDispatch").textContent = `Latest: Node ${first.node_id} (${new Date(first.timestamp).toLocaleTimeString()})`;
+        if (first.recipient_email) {
+          document.getElementById("metricEmail").textContent = first.recipient_email;
+        }
+        if (first.webhook_url) {
+          try {
+            const host = new URL(first.webhook_url).hostname;
+            document.getElementById("metricWebhook").textContent = host;
+          } catch(e) {
+            document.getElementById("metricWebhook").textContent = first.webhook_url;
+          }
+        }
+      } else {
+        document.getElementById("metricLastDispatch").textContent = "No alerts logged in current cycle";
+      }
+
+      const tbody = document.getElementById("alertsTableBody");
+      tbody.innerHTML = "";
+
+      if (alertsData.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">
+              No authority alerts have been dispatched yet. When a sensor reports Fraud Risk &ge; 70.0%, 
+              an urgent alert is automatically triggered and logged here.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      alertsData.forEach((alt, idx) => {
+        const tr = document.createElement("tr");
+
+        const score = parseFloat(alt.risk_score || 0);
+        let scoreColor = "#10b981";
+        let scoreBadgeClass = "badge-normal";
+        if (score >= 75) {
+          scoreColor = "#ef4444";
+          scoreBadgeClass = "badge-critical";
+        } else if (score >= 50) {
+          scoreColor = "#f97316";
+          scoreBadgeClass = "badge-critical";
+        } else if (score >= 25) {
+          scoreColor = "#f59e0b";
+        }
+
+        const dateStr = alt.timestamp ? new Date(alt.timestamp).toLocaleString() : "Unknown";
+        const isSent = alt.delivery_status === "Sent";
+
+        tr.innerHTML = `
+          <td>
+            <div class="alert-id">${alt.alert_id || 'ALT-' + idx}</div>
+            <div style="font-size: 11px; color: var(--text-dim);">${dateStr}</div>
+          </td>
+          <td>
+            <strong>${alt.dma_id || 'DMA 01'}</strong><br>
+            <span class="node-code">${alt.node_id || 'J_100'}</span>
+          </td>
+          <td>
+            <span class="card-badge ${scoreBadgeClass}" style="color: ${scoreColor}; font-weight: 800; font-size: 13px;">
+              ${score.toFixed(1)} / 100
+            </span>
+          </td>
+          <td>
+            <strong style="color: #fff;">${alt.probable_cause || 'partial_bypass'}</strong>
+            <div style="font-size: 11px; color: var(--text-dim);">${(alt.evidence_list && alt.evidence_list[0]) || 'Hydraulic head drop'}</div>
+          </td>
+          <td>
+            ${isSent 
+              ? `<span class="status-sent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sent</span>` 
+              : `<span class="status-failed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Failed</span>`
+            }
+          </td>
+          <td>
+            <div style="font-size: 12px; color: #e2e8f0;">${alt.recipient_email || 'investigations@nwsdb.gov.lk'}</div>
+            <span class="channel-tag">Webhook: ${alt.webhook_url ? (alt.webhook_url.includes('http') ? new URL(alt.webhook_url).pathname : alt.webhook_url) : 'Enabled'}</span>
+          </td>
+          <td>
+            <span style="font-size: 12px; color: #f87171; font-weight: 600;">
+              ${alt.inspection_priority || 'P1 - Immediate Field Investigation'}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="viewAlertPayload(${idx})">
+              Details
+            </button>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function viewAlertPayload(index) {
+      const alt = alertsData[index];
+      if (!alt) return;
+      document.getElementById("modalTitle").textContent = `Alert Payload: ${alt.alert_id || alt.node_id}`;
+      document.getElementById("modalJson").textContent = JSON.stringify(alt, null, 2);
+      document.getElementById("alertDetailModal").classList.add("active");
+    }
+
+    function closeModalDirect() {
+      document.getElementById("alertDetailModal").classList.remove("active");
+    }
+
+    function closeModal(e) {
+      if (e.target.id === "alertDetailModal") {
+        closeModalDirect();
+      }
+    }
+
+    async function triggerManualDispatchTest() {
+      const testPayload = {
+        zone_id: "DMA 01",
+        node_id: "J_100",
+        actual_pressure: 28.5,
+        expected_pressure: 34.7,
+        spatial_deviation: 5.8,
+        recurrence_count: 5,
+        hours_since_supply_start: 3.5
+      };
+
+      try {
+        const res = await fetch("/api/v1/assess-risk", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(testPayload)
+        });
+        if (res.ok) {
+          showToast("Test Telemetry Ingested", "Simulated theft event dispatched for J_100. Dispatched alerts table updated.", "success", 4000);
+          setTimeout(fetchAlertsHistory, 400);
+        } else {
+          showToast("Assessment Request Failed", "Status code " + res.status, "error", 5000);
+        }
+      } catch (err) {
+        showToast("Dispatch Network Error", String(err), "error", 5000);
+      }
+    }
+
+    function showToast(title, message, type = "success", duration = 6500) {
+      const container = document.getElementById("toastContainer");
+      if (!container) return;
+
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+
+      let icon = "✓";
+      if (type === "warning") icon = "⚠";
+      if (type === "error") icon = "✕";
+
+      toast.innerHTML = `
+        <div class="toast-title">
+          <span>${icon}</span>
+          <span>${title}</span>
+        </div>
+        <div class="toast-body">${message}</div>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateX(50px)";
+        setTimeout(() => toast.remove(), 400);
+      }, duration);
+    }
+
+    async function triggerModelRetraining() {
+      const btn = document.getElementById("retrainBtn");
+      const icon = document.getElementById("retrainIcon");
+      const text = document.getElementById("retrainBtnText");
+
+      btn.disabled = true;
+      icon.style.display = "none";
+      const spinner = document.createElement("span");
+      spinner.className = "spinner";
+      spinner.id = "btnSpinner";
+      btn.insertBefore(spinner, text);
+      text.textContent = "Retraining Model...";
+
+      try {
+        const res = await fetch("/api/v1/models/retrain", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ min_new_entries: 5, force: false })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.status === "success") {
+          const deltaPct = (data.f1_delta >= 0 ? "+" : "") + (data.f1_delta * 100).toFixed(2) + "%";
+          const newF1Pct = (data.new_f1_score * 100).toFixed(2) + "%";
+          showToast(
+            "Stage 2 Model Retrained Successfully",
+            `Incorporated ${data.new_samples_added} verified field entries with balanced class weights. New F1-Score: ${newF1Pct} (Delta: ${deltaPct}). Backup tag saved to ${data.backup_model_path}.`,
+            "success",
+            7500
+          );
+        } else if (data.status === "skipped") {
+          showToast(
+            "Retraining Paused (Sample Threshold)",
+            data.message || `Need at least 5 new verified entries. Currently found ${data.new_entries_count || 0}.`,
+            "warning",
+            6500
+          );
+        } else {
+          showToast("Retraining Error", data.detail || data.message || "An unexpected error occurred", "error", 6000);
+        }
+      } catch (err) {
+        showToast("Retraining Network Error", String(err), "error", 6000);
+      } finally {
+        btn.disabled = false;
+        const sp = document.getElementById("btnSpinner");
+        if (sp) sp.remove();
+        icon.style.display = "inline-block";
+        text.textContent = "Retrain Model with Field Verifications";
+      }
+    }
+  </script>
+</body>
+</html>
