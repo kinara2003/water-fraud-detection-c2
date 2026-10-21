@@ -130,29 +130,16 @@
     "batched_for_retraining": true
   },
   {
-    "inspection_id": "INSP-20261020-6908",
+    "inspection_id": "INSP-20261021-7863",
     "alert_id": "ALT-1791355886-J_100",
     "node_id": "J_100",
     "dma_id": "DMA 01",
-    "dispatch_time": "2026-10-20T15:21:48.008198+00:00",
+    "dispatch_time": "2026-10-21T02:44:23.806230+00:00",
     "inspection_time": "2026-10-19",
     "assigned_officer": "Eng. K. Perera (Team 3)",
     "ground_truth_finding": "CONFIRMED_BYPASS",
     "action_taken": "Unauthorized tap confiscated; legal penalty filed.",
     "notes": "Verified secondary branch tap via acoustic stethoscope.",
-    "batched_for_retraining": false
-  },
-  {
-    "inspection_id": "INSP-20261020-6943",
-    "alert_id": "ALT-REHEARSAL-1792516943",
-    "node_id": "J_100",
-    "dma_id": "DMA 01",
-    "dispatch_time": "2026-10-20T15:22:23.979892+00:00",
-    "inspection_time": "2026-10-20T17:22:23.979892+00:00",
-    "assigned_officer": "Eng. K. Perera (Team 3)",
-    "ground_truth_finding": "CONFIRMED_BYPASS",
-    "action_taken": "Unmetered 50mm branch disconnected and confiscated; NWSDB penalty notice served.",
-    "notes": "Verified unauthorized industrial tap during viva defense rehearsal demonstration.",
     "batched_for_retraining": false
   }
 ]

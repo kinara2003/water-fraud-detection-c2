@@ -4,7 +4,7 @@
 **Utility Partner:** National Water Supply and Drainage Board (NWSDB), Sri Lanka  
 **Pilot Study DMA:** Kaduwela Distribution Sectors (DMA 01 & DMA 02)  
 **Hydraulic Regime:** Intermittent Water Supply (IWS) -- Active Supply Window: 06:00 to 18:00  
-**Generated Date:** 2026-10-20 17:22:18 UTC  
+**Generated Date:** 2026-10-21 04:44:51 UTC  
 **Package Version:** Component 2 Defense Artifacts Package v1.2.0 (Production Release)
 
 ---

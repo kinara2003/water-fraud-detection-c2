@@ -1,6 +1,6 @@
 {
   "candidate_batch_file": "candidate_batch.csv",
-  "generated_at": "2026-10-20T17:21:47.962334+00:00",
+  "generated_at": "2026-10-21T04:44:23.714972+00:00",
   "batch_size": 10,
   "status": "AWAITING_HUMAN_IN_THE_LOOP_VALIDATION",
   "class_breakdown": {
